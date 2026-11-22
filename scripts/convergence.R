@@ -14,11 +14,21 @@ rand_orthogonal <- function(dim) {
   qr.Q(qr(matrix(rnorm(dim^2), dim)))
 }
 
+#' Generate a random initial genotype covariance matrix
+#'
+#' @param n_loci Number of genetic loci
+#'
+#' @return Randomly generated initial genotype variance
 rand_cov_G0 <- function(n_loci) {
   U_G0 <- rand_orthogonal(n_loci)
   U_G0 %*% diag(runif(n_loci)) %*% t(U_G0)
 }
 
+#' Generate a random environmental covariance matrix
+#'
+#' @param n_traits Number of traits (phenotypes)
+#'
+#' @return Randomly generated environmental component covariance matrix
 rand_cov_e <- function(n_traits) {
   U_e <- rand_orthogonal(n_traits)
   U_e %*% diag(runif(n_traits)) %*% t(U_e)
